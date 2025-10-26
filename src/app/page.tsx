@@ -2,15 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { UploadCloud, Copy, Check, X, Loader2 } from 'lucide-react';
+import { UploadCloud, Copy, Check, X, Loader2, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { runGeneratePrompt } from './actions';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { cn } from '@/lib/utils';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 type ImagePromptItem = {
   id: number;
@@ -74,7 +72,7 @@ export default function Home() {
     }
 
     if(newItems.length > 0) {
-      setItems(prev => [...prev, ...newItems]);
+      setItems(prev => [...newItems, ...prev]);
       newItems.forEach(item => processFile(item.id, item.file));
     }
   };
@@ -141,16 +139,18 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-background">
-      <div className="w-full max-w-4xl mx-auto space-y-8">
-        <header className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold font-headline text-foreground">Visual Promptcraft</h1>
-          <p className="text-muted-foreground mt-2 text-lg">
-            حول صورك إلى مطالبات ذكاء اصطناعي وصفية على الفور.
+    <main className="flex min-h-screen flex-col items-center p-4 sm:p-8 bg-background text-foreground">
+      <div className="w-full max-w-5xl mx-auto space-y-8">
+        <header className="text-center space-y-2">
+          <h1 className="text-4xl sm:text-5xl font-bold font-headline text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#007C91]">
+            Visual Promptcraft
+          </h1>
+          <p className="text-muted-foreground mt-2 text-lg max-w-2xl mx-auto">
+            حول صورك إلى مطالبات ذكاء اصطناعي وصفية على الفور. ارفع الصورة واحصل على مطالبة مبتكرة.
           </p>
         </header>
 
-        <Card className="w-full overflow-hidden shadow-lg">
+        <Card className="w-full overflow-hidden shadow-lg bg-card/60 backdrop-blur-xl border-white/20">
           <CardContent className="p-0">
             <label
               htmlFor="dropzone-file"
@@ -158,16 +158,16 @@ export default function Home() {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               className={cn(
-                  "flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors",
-                  isDragging && "border-primary bg-primary/10"
+                  "flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer transition-colors",
+                  isDragging ? "border-primary bg-primary/10" : "border-border/50 hover:border-primary/50 hover:bg-primary/5"
               )}
             >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <UploadCloud className="w-10 h-10 mb-3 text-muted-foreground" />
-                <p className="mb-2 text-sm text-muted-foreground">
+              <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
+                <UploadCloud className="w-12 h-12 mb-4 text-primary" />
+                <p className="mb-2 text-base text-foreground">
                   <span className="font-semibold text-primary">انقر للتحميل</span> أو قم بالسحب والإفلات
                 </p>
-                <p className="text-xs text-muted-foreground">PNG, JPG, أو WEBP (الحد الأقصى 4 ميغابايت)</p>
+                <p className="text-xs text-muted-foreground">PNG, JPG, أو WEBP (الحد الأقصى 4 ميغابايت لكل صورة)</p>
               </div>
               <input
                 ref={fileInputRef}
@@ -183,14 +183,17 @@ export default function Home() {
         </Card>
 
         {items.length > 0 && (
-          <div className="w-full space-y-4">
+          <div className="w-full space-y-6">
              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold">الصور التي تم تحميلها</h2>
-                <Button variant="outline" onClick={handleClearAll}>مسح الكل</Button>
+                <h2 className="text-3xl font-bold">الصور التي تم تحميلها</h2>
+                <Button variant="outline" onClick={handleClearAll} className="bg-transparent hover:bg-destructive hover:text-destructive-foreground">
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  مسح الكل
+                </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((item) => (
-                <Card key={item.id} className="shadow-lg overflow-hidden">
+                <Card key={item.id} className="shadow-lg overflow-hidden flex flex-col bg-card/60 backdrop-blur-xl border-white/20">
                   <div className="relative w-full aspect-video bg-muted/20">
                     <Image
                       src={item.previewUrl}
@@ -201,7 +204,7 @@ export default function Home() {
                      <Button
                         variant="destructive"
                         size="icon"
-                        className="absolute top-2 right-2 rounded-full h-8 w-8 shadow-md z-10"
+                        className="absolute top-2 right-2 rounded-full h-8 w-8 shadow-md z-10 bg-black/50 hover:bg-destructive border-white/20"
                         onClick={() => handleClear(item.id)}
                       >
                         <X className="h-4 w-4" />
@@ -209,13 +212,13 @@ export default function Home() {
                       </Button>
                   </div>
                   <CardHeader>
-                    <CardTitle className="text-lg truncate" title={item.file.name}>{item.file.name}</CardTitle>
+                    <CardTitle className="text-lg truncate font-medium" title={item.file.name}>{item.file.name}</CardTitle>
                   </CardHeader>
-                  <CardContent className="min-h-[100px]">
+                  <CardContent className="min-h-[120px] flex-grow flex items-center justify-center">
                     {item.isPending && (
-                      <div className="flex items-center space-x-2">
-                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                         <span>جارٍ الإنشاء...</span>
+                      <div className="flex flex-col items-center space-y-2 text-muted-foreground">
+                         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                         <span className="text-sm">جارٍ الإنشاء...</span>
                       </div>
                     )}
                     {item.error && !item.isPending && (
@@ -230,7 +233,10 @@ export default function Home() {
                   </CardContent>
                   {item.prompt && !item.isPending && (
                     <CardFooter>
-                        <Button onClick={() => handleCopy(item.id, item.prompt)} className="w-full sm:w-auto" variant="default">
+                        <Button 
+                          onClick={() => handleCopy(item.id, item.prompt)} 
+                          className="w-full bg-gradient-to-r from-primary to-[#007C91] text-white transition-transform hover:scale-105"
+                        >
                             {copiedItemId === item.id ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
                             {copiedItemId === item.id ? 'تم النسخ!' : 'نسخ المطالبة'}
                         </Button>
@@ -245,5 +251,3 @@ export default function Home() {
     </main>
   );
 }
-
-    
