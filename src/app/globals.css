@@ -14,24 +14,24 @@ body {
     --card-foreground: 0 0% 17%;
     --popover: 216 28% 97%;
     --popover-foreground: 0 0% 17%;
-    --primary: 0 84.2% 60.2%; /* Red */
+    --primary: 183 100% 40%; /* #00C2CB */
     --primary-foreground: 210 40% 98%;
     --secondary: 0 0% 12%; /* #1E1E1E */
     --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 0 84.2% 60.2%; /* Red */
+    --accent: 183 100% 40%; /* #00C2CB */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 0 84.2% 60.2%; /* Red */
-    --chart-1: 0 84.2% 60.2%; /* Red */
-    --chart-2: 0 80% 55%;
-    --chart-3: 0 70% 50%;
-    --chart-4: 0 60% 45%;
-    --chart-5: 0 50% 40%;
+    --ring: 183 100% 40%; /* #00C2CB */
+    --chart-1: 183 100% 40%; /* #00C2CB */
+    --chart-2: 183 90% 45%;
+    --chart-3: 183 80% 50%;
+    --chart-4: 183 70% 55%;
+    --chart-5: 183 60% 60%;
     --radius: 0.5rem;
   }
   .dark {
@@ -41,24 +41,24 @@ body {
     --card-foreground: 210 40% 98%;
     --popover: 0 0% 12%;
     --popover-foreground: 210 40% 98%;
-    --primary: 0 84.2% 60.2%; /* Red */
+    --primary: 183 100% 40%; /* #00C2CB */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 98%;
     --secondary-foreground: 0 0% 12%;
     --muted: 0 0% 15%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 0 84.2% 60.2%; /* Red */
+    --accent: 183 100% 40%; /* #00C2CB */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 0 84.2% 60.2%; /* Red */
-    --chart-1: 0 84.2% 60.2%; /* Red */
-    --chart-2: 0 80% 55%;
-    --chart-3: 0 70% 50%;
-    --chart-4: 0 60% 45%;
-    --chart-5: 0 50% 40%;
+    --ring: 183 100% 40%; /* #00C2CB */
+    --chart-1: 183 100% 40%; /* #00C2CB */
+    --chart-2: 183 90% 45%;
+    --chart-3: 183 80% 50%;
+    --chart-4: 183 70% 55%;
+    --chart-5: 183 60% 60%;
   }
 }
 

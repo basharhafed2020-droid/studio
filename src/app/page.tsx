@@ -142,7 +142,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-4 sm:p-8 bg-background text-foreground">
       <div className="w-full max-w-5xl mx-auto space-y-8">
         <header className="text-center space-y-2">
-          <h1 className="text-4xl sm:text-5xl font-bold font-headline text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#C10000]">
+          <h1 className="text-4xl sm:text-5xl font-bold font-headline text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#007C91]">
             Visual Promptcraft
           </h1>
           <p className="text-muted-foreground mt-2 text-lg max-w-2xl mx-auto">
@@ -235,7 +235,7 @@ export default function Home() {
                     <CardFooter>
                         <Button 
                           onClick={() => handleCopy(item.id, item.prompt)} 
-                          className="w-full bg-gradient-to-r from-primary to-[#C10000] text-white transition-transform hover:scale-105"
+                          className="w-full bg-gradient-to-r from-primary to-[#007C91] text-white transition-transform hover:scale-105"
                         >
                             {copiedItemId === item.id ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
                             {copiedItemId === item.id ? 'تم النسخ!' : 'نسخ المطالبة'}
